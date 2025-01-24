@@ -1,18 +1,32 @@
-// import { useContext } from "react";
-// import { CalendarContext } from "./index";
+import { FC, useContext, useMemo } from "react";
+import { CalendarContext } from "./index";
+import { CalendarCurrentBaseCls } from "@consts/className";
 
-// const CalendarCurrent = () => {
-//     const {currentDate} = useContext(CalendarContext);
+interface CalendarCurrentProps {
+  className?: string;
+}
 
-//     const month = currentDate.getMonth();
-//     const year = currentDate.getFullYear();
-//     const day = currentDate.getDay();
-    
-//     return(
-//         <div>
-//             <p>{month} - {year} - {day}</p>
-//         </div>
-//     )
-// }
+const CalendarCurrent: FC<CalendarCurrentProps> = (props) => {
+  const { className } = props;
+  const { currentDate } = useContext(CalendarContext);
 
-// export default CalendarCurrent;
+  const calendarCurrentCls = useMemo(() => {
+    return className
+      ? `${className} ${CalendarCurrentBaseCls}`
+      : CalendarCurrentBaseCls;
+  }, [className]);
+
+  const month = currentDate.getMonth();
+  const year = currentDate.getFullYear();
+  const day = currentDate.getDate();
+
+  return (
+    <div>
+      <p className={calendarCurrentCls}>
+        {year} - {month + 1} - {day}
+      </p>
+    </div>
+  );
+};
+
+export default CalendarCurrent;

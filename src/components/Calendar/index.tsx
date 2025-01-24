@@ -1,61 +1,95 @@
-// import { Dispatch, FC, PropsWithChildren, SetStateAction, useState, createContext } from "react";
-// import CalendarBody from "./CalendarBody";
-// import CalendarCurrent from "./CalendarCurrent";
-// import CalendarNavigate from "./CalendarNavigate";
+import {
+  Dispatch,
+  FC,
+  PropsWithChildren,
+  SetStateAction,
+  useState,
+  createContext,
+  useEffect,
+  useMemo,
+} from "react";
+import CalendarBody from "./CalendarBody";
+import CalendarCurrent from "./CalendarCurrent";
+import CalendarNavigate from "./CalendarNavigate";
+import { CalendarBaseCls } from "@consts/className";
 
-// interface CalendarComponentProps {
-//     Body: typeof CalendarBody;
-//     Current: typeof CalendarCurrent;
-//     Navigator: typeof CalendarNavigate;
-// }
+interface CalendarComponentProps {
+  Body: typeof CalendarBody;
+  Current: typeof CalendarCurrent;
+  Navigator: typeof CalendarNavigate;
+}
 
-// interface CalendarProps {
-//     onChange: (newDate: Date) => void;
-//     value: Date;
-// }
+interface CalendarProps {
+  onChange: (newDate: Date) => void;
+  value: Date;
+  className?: string;
+}
 
-// interface CalendarContextProps {
-//     currentDate : Date;
-//     setCurrentDate : Dispatch<SetStateAction<Date>>;
-//     handleNext: () => void;
-//     handlePrev : () =>  void;
-// }
+interface CalendarContextProps {
+  currentDate: Date;
+  setCurrentDate: Dispatch<SetStateAction<Date>>;
+  handleNext: () => void;
+  handlePrev: () => void;
+  handleSelectDate: (date: Date) => void;
+}
 
-// export const CalendarContext = createContext<CalendarContextProps>({
-//     currentDate: new Date(), //현재 날짜
-//     setCurrentDate: () => {},
-//     handleNext: () => {},
-//     handlePrev: () => {},
-// });
+export const CalendarContext = createContext<CalendarContextProps>({
+  currentDate: new Date(), //현재 날짜
+  setCurrentDate: () => {},
+  handleNext: () => {},
+  handlePrev: () => {},
+  handleSelectDate: () => {},
+});
 
-// interface CalendarProps extends PropsWithChildren {} 
-// const Calendar : FC<CalendarProps> & CalendarComponentProps = (props) => {
-//     const {children, onChange, value} = props;
-//     const [currentDate, setCurrentDate] = useState<Date>(new Date());  // 현재 날짜짜
+interface CalendarProps extends PropsWithChildren {}
+const Calendar: FC<CalendarProps> & CalendarComponentProps = (props) => {
+  const { children, onChange, value, className } = props;
+  const [currentDate, setCurrentDate] = useState<Date>(value); // 현재 날짜
 
-//     const handleNext = () => {
-//         const newDate = new Date(currentDate); //현재 날짜의 객체를 만듦
-//         newDate.setMonth(newDate.getMonth() + 1 ); //다음 달로 설정
-//         setCurrentDate(newDate);
-//     }
+  const calendarCls = useMemo(() => {
+    return className ? `${className} ${CalendarBaseCls}` : CalendarBaseCls;
+  }, [className]);
 
-//     const handlePrev = () => {
-//         const newDate = new Date(currentDate);
-//         newDate.setMonth(newDate.getMonth() - 1);
-//         setCurrentDate(newDate);
-//     }
+  const handleNext = () => {
+    const newDate = new Date(currentDate); //현재 날짜의 객체를 만듦
+    newDate.setMonth(newDate.getMonth() + 1); //다음 달로 설정
+    setCurrentDate(newDate);
+    onChange(newDate);
+  };
 
-//     return(
-//         <CalendarContext.Provider value={{currentDate, setCurrentDate, handleNext, handlePrev}}>
-//             <div>
-//                 {children}
-//             </div>
-//         </CalendarContext.Provider>
-//     )
-// }
+  const handlePrev = () => {
+    const newDate = new Date(currentDate);
+    newDate.setMonth(newDate.getMonth() - 1);
+    setCurrentDate(newDate);
+    onChange(newDate);
+  };
 
-// Calendar.Body = CalendarBody;
-// Calendar.Navigator = CalendarNavigate;
-// Calendar.Current = CalendarCurrent;
+  const handleSelectDate = (date: Date) => {
+    setCurrentDate(date);
+    onChange(date);
+  };
 
-// export default Calendar;
+  useEffect(() => {
+    console.log(currentDate);
+  }, [currentDate]);
+
+  return (
+    <CalendarContext.Provider
+      value={{
+        currentDate,
+        setCurrentDate,
+        handleNext,
+        handlePrev,
+        handleSelectDate,
+      }}
+    >
+      <div className={calendarCls}>{children}</div>
+    </CalendarContext.Provider>
+  );
+};
+
+Calendar.Body = CalendarBody;
+Calendar.Navigator = CalendarNavigate;
+Calendar.Current = CalendarCurrent;
+
+export default Calendar;

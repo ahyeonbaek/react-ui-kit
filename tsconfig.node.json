@@ -21,7 +21,11 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": false,
     // "noUncheckedSideEffectImports": true
+
+    "paths": {
+      "@ui/*": ["./src/components/*"],
+      "@consts/*": ["./src/consts/*"]
+    }
   },
   "include": ["src/components"]
 }
-

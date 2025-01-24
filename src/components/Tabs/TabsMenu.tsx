@@ -1,20 +1,25 @@
-import { ReactNode , useContext} from "react";
+import { ReactNode, useContext, useMemo } from "react";
 import { TabsContext } from ".";
+import { tabsMenuBaseCls } from "@consts/className";
 
-interface TabsMenuProps{
-    index: number;
-    children: ReactNode;
+interface TabsMenuProps {
+  index: number;
+  children: ReactNode;
+  className?: string;
 }
 
-const TabsMenu = ({ index , children}:TabsMenuProps) =>{
-    const { setSelectedTab} = useContext(TabsContext);
+const TabsMenu = ({ index, children, className }: TabsMenuProps) => {
+  const { setSelectedTab } = useContext(TabsContext);
 
-    return(
-        <div onClick={() => setSelectedTab(index)}>
-            {children}
-        </div>
-    );
+  const tabsMenuCls = useMemo(() => {
+    return className ? `${className} ${tabsMenuBaseCls}` : tabsMenuBaseCls;
+  }, [className]);
 
+  return (
+    <div onClick={() => setSelectedTab(index)} className={tabsMenuCls}>
+      {children}
+    </div>
+  );
 };
 
 export default TabsMenu;

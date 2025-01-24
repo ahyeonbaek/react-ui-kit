@@ -1,22 +1,26 @@
-import { ReactNode, useContext,} from "react";
+import { ReactNode, useContext,useMemo } from "react";
 import { TabsContext } from ".";
-import { tabsPannelBaseCls } from "../../consts/className";
+import { tabsPannelBaseCls } from "@consts/className";
 
 interface TabsPannelProps {
-    index: number;
-    children: ReactNode;
+  index: number;
+  children: ReactNode;
+  className?: string;
 }
 
-const TabsPannel = ({children, index} : TabsPannelProps) => {
-    const {selectedTab} = useContext(TabsContext);
+const TabsPannel = ({ children, index, className }: TabsPannelProps) => {
+  const { selectedTab } = useContext(TabsContext);
 
-    if (selectedTab !== index) return null;
+  const tabsPannelCls = useMemo(() => {
+    return className
+    ? `${className} ${tabsPannelBaseCls}`
+    : tabsPannelBaseCls;
+  }, [className]);
 
-    return(
-        <div className={tabsPannelBaseCls}>
-            {children}
-        </div>
-    );
+
+  if (selectedTab !== index) return null;
+
+  return <div className={tabsPannelCls}>{children}</div>;
 };
 
 export default TabsPannel;

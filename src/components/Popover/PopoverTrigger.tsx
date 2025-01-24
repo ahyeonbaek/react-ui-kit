@@ -1,37 +1,31 @@
-import { forwardRef, ReactNode, useContext, useEffect, useRef } from "react";
+import { ReactNode, useContext, useMemo } from "react";
 import { PopoverContext } from "./index";
+import { popoverTriggerBaseCls } from "@consts/className";
 
 interface PopoverTriggerProps {
-    children: ReactNode;
-    className?: string;
+  children: ReactNode;
+  className?: string;
 }
 
 const PopoverTrigger = (props: PopoverTriggerProps) => {
-    const {children, className} = props;
-    const {setTriggerPosition,triggerPosition, handleClickTrigger} = useContext(PopoverContext);
-    const trrigerRef = useRef<HTMLDivElement>(null);
+  const { children, className } = props;
+  const { handleClickTrigger, triggerRef } = useContext(PopoverContext);
 
-    useEffect(() => {
-        
-        calculateTrigger();
-    },[])
+  const popoverTriggerCls = useMemo(() => {
+    return className
+      ? `${className} ${popoverTriggerBaseCls}`
+      : popoverTriggerBaseCls;
+  }, [className]);
 
-    //트리거 위치 계산
-    const calculateTrigger = () => {
-        if(trrigerRef.current) {
-            setTriggerPosition(trrigerRef.current.getBoundingClientRect());
-        }
-    }
-
-    console.log('trrigerPosition',triggerPosition);
-
-    return(
-        <div className={`trigger ${className}`} ref={trrigerRef} onClick={handleClickTrigger} style={{width:'79px'}}>
-            <button>
-                {children}
-            </button>
-        </div>
-    )
-}
+  return (
+    <button
+      className={popoverTriggerCls}
+      ref={triggerRef}
+      onClick={handleClickTrigger}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default PopoverTrigger;

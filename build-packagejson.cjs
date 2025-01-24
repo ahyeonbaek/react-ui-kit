@@ -6,31 +6,31 @@ const buildDir = path.resolve(__dirname, "dist");
 const packageName = "ahyeon-react-ui-kit";
 
 const getPackageJsonData = () => {
-    const { react: reactVersion, "react-dom": reactDomVersion } =
+  const { react: reactVersion, "react-dom": reactDomVersion } =
     packageJson.dependencies;
-    return {
-    version: "0.0.2",
+  return {
+    version: "0.0.10",
     name: packageName,
     main: "./index.cjs",
     module: "./index.js",
     types: "./types/index.d.ts",
     peerDependencies: {
-        react: reactVersion,
-        "react-dom": reactDomVersion,
+      react: reactVersion,
+      "react-dom": reactDomVersion,
     },
-    };
+  };
 };
 
 const makePackageJson = () => {
-    try {
+  try {
     const buildPackageJsonData = getPackageJsonData();
     fs.writeFileSync(
-        path.resolve(buildDir, "package.json"),
-        JSON.stringify(buildPackageJsonData)
+      path.resolve(buildDir, "package.json"),
+      JSON.stringify(buildPackageJsonData)
     );
-    } catch (err) {
+  } catch (err) {
     console.log(err);
-    }
+  }
 };
 
 makePackageJson();

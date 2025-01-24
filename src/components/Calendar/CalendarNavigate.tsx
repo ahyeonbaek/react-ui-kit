@@ -1,14 +1,31 @@
-// import { useContext } from "react";
-// import { CalendarContext } from ".";
+import { FC, useContext, useMemo } from "react";
+import { CalendarContext } from ".";
+import { CalendarNavigatorBaseCls } from "@consts/className";
 
-// const CalendarNavigate = () => {
-//     const {handleNext, handlePrev} = useContext(CalendarContext);
-//     return(
-//         <div>
-//             <button onClick={handlePrev}>prev</button>
-//             <button onClick={handleNext}>next</button>
-//         </div>
-//     )
-// }
+interface CalendarNavigateProps {
+  className?: string;
+}
 
-// export default CalendarNavigate;
+const CalendarNavigate: FC<CalendarNavigateProps> = (props) => {
+  const { className } = props;
+  const { handleNext, handlePrev } = useContext(CalendarContext);
+
+  const calendarNavigatorCls = useMemo(() => {
+    return className
+      ? `${className} ${CalendarNavigatorBaseCls}`
+      : CalendarNavigatorBaseCls;
+  }, [className]);
+
+  return (
+    <div>
+      <button onClick={handlePrev} className={calendarNavigatorCls}>
+        prev
+      </button>
+      <button onClick={handleNext} className={calendarNavigatorCls}>
+        next
+      </button>
+    </div>
+  );
+};
+
+export default CalendarNavigate;

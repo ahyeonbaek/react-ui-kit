@@ -1,16 +1,30 @@
-import  { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { CarouselContext } from ".";
-import { carouselNavigatorCls } from "../../consts/className";
+import { carouselNavigatorBaseCls } from "@consts/className";
 
-const CarouselNavigator = () => {
-    const { handleNext, handlePrev } = useContext(CarouselContext);
+interface NavigatorProps {
+  className?: string;
+}
 
-    return (
-        <div className={carouselNavigatorCls}>
-            <button onClick={handlePrev}>이전</button>
-            <button onClick={handleNext}>다음</button>
-        </div>
-    );
+const CarouselNavigator = ({ className }: NavigatorProps) => {
+  const { handleNext, handlePrev } = useContext(CarouselContext);
+
+  const carouselNavigatorCls = useMemo(() => {
+    return className
+      ? `${className} ${carouselNavigatorBaseCls}`
+      : carouselNavigatorBaseCls;
+  }, [className]);
+
+  return (
+    <div>
+      <button onClick={handlePrev} className={carouselNavigatorCls}>
+        이전
+      </button>
+      <button onClick={handleNext} className={carouselNavigatorCls}>
+        다음
+      </button>
+    </div>
+  );
 };
 
 export default CarouselNavigator;
