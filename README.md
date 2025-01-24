@@ -40,6 +40,8 @@ npm install ahyeon-react-ui-kit
 </Accordion>
 ```
 
+---
+
 ### Modal
 
 #### Children
@@ -74,6 +76,8 @@ npm install ahyeon-react-ui-kit
 </Modal>
 ```
 
+---
+
 ### Pagination
 
 #### Children
@@ -96,6 +100,8 @@ npm install ahyeon-react-ui-kit
 </Pagination>
 ```
 
+---
+
 ### Calendar
 
 #### Chilren
@@ -115,6 +121,8 @@ npm install ahyeon-react-ui-kit
 </Calendar>
 ```
 
+---
+
 ### Breadcrumb
 
 #### Children
@@ -132,6 +140,8 @@ npm install ahyeon-react-ui-kit
   <Breadcrumb.Item href="/a-a-a-a">A-A-A-A</Breadcrumb.Item>
 </Breadcrumb>
 ```
+
+---
 
 ### Carousel
 
@@ -157,6 +167,8 @@ npm install ahyeon-react-ui-kit
 </Carousel>
 ```
 
+---
+
 ### Tabs
 
 #### Children
@@ -181,6 +193,8 @@ npm install ahyeon-react-ui-kit
 </Tabs>
 ```
 
+---
+
 ### Popover
 
 #### Children
@@ -200,6 +214,8 @@ npm install ahyeon-react-ui-kit
 </Popover>
 ```
 
+---
+
 ### DatePicker
 
 #### Children
@@ -211,6 +227,8 @@ npm install ahyeon-react-ui-kit
 ```tsx
 <DatePicker onChangeDate={handleChangeDatePicker} />
 ```
+
+---
 
 ### Select
 
