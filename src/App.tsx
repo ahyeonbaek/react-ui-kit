@@ -54,7 +54,6 @@ function App() {
       <Select onChange={handleChangeValue} value={selectedValue}>
         {/** 클릭 시 Option들을 보여주고, 선택된 option를 보여줌 **/}
         <Select.Trigger />
-
         {/** 보여질 Option들을 나열 **/}
         <Select.Content>
           <Select.Item value={"1"}>One</Select.Item>
@@ -96,8 +95,8 @@ function App() {
       <Breadcrumb width="100px">
         <Breadcrumb.Item href="/a">A</Breadcrumb.Item>
         <Breadcrumb.Item href="/a-a">A-A</Breadcrumb.Item>
-        {/* <Breadcrumb.Item href="/a-a-a">A-A-A</Breadcrumb.Item>
-        <Breadcrumb.Item href="/a-a-a-a">A-A-A-A</Breadcrumb.Item> */}
+        <Breadcrumb.Item href="/a-a-a">A-A-A</Breadcrumb.Item>
+        <Breadcrumb.Item href="/a-a-a-a">A-A-A-A</Breadcrumb.Item>
       </Breadcrumb>
       <h1>Calendar</h1>
       <Calendar onChange={handleChangeDate} value={date}>
