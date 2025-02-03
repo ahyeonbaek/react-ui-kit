@@ -265,6 +265,22 @@ npm install ahyeon-react-ui-kit
 #### example
 
 ```tsx
-<Toaster />
-<button onClick={() => handleClickOpenToast()}> open toast </button>
+const toast = useToast();
+  const handleClickOpenToast = () => {
+    toast({
+      title: "ToastTitle",
+      description: "ToastDescription",
+      buttonCustom: "close",
+      className: "toast_content",
+      buttonClassName: "toast_button",
+      titleClassName: "toast_title",
+      descriptionClassName: "toast_description",
+    });
+  }; // toast 알림 제목, 내용, 닫기버튼명, 각각의 클래스네임을 prop으로 전달합니다.
+
+return(
+  <Toaster />
+  <button onClick={() => handleClickOpenToast()}> open toast </button>
+)
+
 ```
