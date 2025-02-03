@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Tabs,
   Carousel,
@@ -10,6 +10,9 @@ import {
   DatePicker,
   Select,
   Accordion,
+  Progress,
+  useToast,
+  Toaster,
 } from "./components";
 
 function App() {
@@ -49,8 +52,34 @@ function App() {
     setSelectedValue(selectedValue);
   };
 
+  /* progress */
+  const [stop, setStop] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStop(true);
+    }, 5000); // 5초 후 stop 활성화
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  /* toast */
+  const toast = useToast();
+  const handleClickOpenToast = () => {
+    toast({
+      title: "ToastTitle",
+      description: "ToastDescription",
+      buttonCustom: "close",
+      className: "toast-content",
+    });
+  };
+
   return (
     <>
+      <h1>Toast</h1>
+      <Toaster />
+      <button onClick={() => handleClickOpenToast()}>open toast</button>
+      <Progress stop={stop}></Progress>
       <Select onChange={handleChangeValue} value={selectedValue}>
         {/** 클릭 시 Option들을 보여주고, 선택된 option를 보여줌 **/}
         <Select.Trigger />
@@ -151,6 +180,5 @@ function App() {
     </>
   );
 }
-25;
 
 export default App;

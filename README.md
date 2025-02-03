@@ -253,3 +253,18 @@ npm install ahyeon-react-ui-kit
   </Select.Content>
 </Select>
 ```
+
+---
+
+### Toast
+
+#### Children
+
+- `<Toster>`
+
+#### example
+
+```tsx
+<Toaster />
+<button onClick={() => handleClickOpenToast()}> open toast </button>
+```

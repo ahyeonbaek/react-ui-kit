@@ -58,3 +58,10 @@ export const AccordionBaseCls = getBaseCls("accordion");
 export const AccordionItemBaseCls = getBaseCls("accordion-item");
 export const AccordionTriggerBaseCls = getBaseCls("accordion-trigger");
 export const AccordionContentBaseCls = getBaseCls("accordion-content");
+
+/* progress */
+export const ProgressBaseCls = getBaseCls("progress");
+
+/* Toast */
+export const ToastBaseCls = getBaseCls("toast");
+export const ToasterBaseCls = getBaseCls("toaster");
