@@ -38,7 +38,6 @@ const Tabs: FC<TabsProps> & TabsCompoundProps = (props) => {
   const [selectedTab, setSelectedTab] = useState<number>(1);
 
   const handleChangeTabIndex: Dispatch<SetStateAction<number>> = (index) => {
-    //console.log(index);
     if (selectedTab === index) return;
     setSelectedTab(index);
   };

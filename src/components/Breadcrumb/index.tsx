@@ -39,7 +39,6 @@ const Breadcrumb: FC<BreadcrumbProps> & ComponentType = (props) => {
     const container = containerRef.current;
     if (container) {
       setItemWidth(container.getBoundingClientRect().width);
-      console.log("itemsWidth:", itemsWidth);
     }
 
     if (itemsWidth > containerWidth) {
