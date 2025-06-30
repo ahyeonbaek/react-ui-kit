@@ -29,14 +29,13 @@ const Trigger: FC<TriggerProps> = (props) => {
   }
 
   return (
-    <div>
+    <div className={modalTriggerCls}>
       {React.Children.map(props.children, (child) => {
         if (isValidElement(child)) {
           return cloneElement(child as ReactElement, {
             onClick: () => {
               onOpenModal();
             },
-            className: modalTriggerCls,
           });
         }
         return child;
