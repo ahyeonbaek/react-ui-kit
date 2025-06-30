@@ -24,12 +24,12 @@ interface SelectProps extends PropsWithChildren {
   onChange: (value: string) => void;
   value: string;
   className?: string;
+  label?: string;
 }
 
 interface SelectContextProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-
   handleSelectItem: (value: string, label: ReactNode) => void;
   currentItem: { value: string; label: ReactNode };
   setCurrentItem: Dispatch<SetStateAction<{ value: string; label: ReactNode }>>;
@@ -44,12 +44,12 @@ export const SelectContext = createContext<SelectContextProps>({
 });
 
 const Select: FC<SelectProps> & SelectCompoundsProps = (props) => {
-  const { children, onChange, className } = props;
+  const { children, onChange, className, label } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<{
     value: string;
     label: ReactNode;
-  }>({ value: "", label: "select Trigger" });
+  }>({ value: "", label: label ? label : "select Trigger" });
 
   const selectCls = useMemo(() => {
     return className ? `${className} ${SelectBaseCls}` : SelectBaseCls;
