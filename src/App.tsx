@@ -16,10 +16,6 @@ import {
 } from "./components";
 
 function App() {
-  // const handleChangeTab = (index: number) => {
-  //     console.log(index);
-  // }
-
   const [date, setDate] = useState<Date>(new Date()); //현재 날짜
 
   const handleChangeDate = (newDate: Date) => {
@@ -48,7 +44,6 @@ function App() {
 
   const [selectedValue, setSelectedValue] = useState<string>("1");
   const handleChangeValue = (selectedValue: string) => {
-    console.log(selectedValue);
     setSelectedValue(selectedValue);
   };
 
@@ -58,7 +53,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setStop(true);
-    }, 5000); // 5초 후 stop 활성화
+    }, 3000); // 5초 후 stop 활성화
 
     return () => clearTimeout(timer);
   }, []);
@@ -80,7 +75,12 @@ function App() {
       <Toaster />
       <button onClick={() => handleClickOpenToast()}>open toast</button>
       <Progress stop={stop}></Progress>
-      <Select onChange={handleChangeValue} value={selectedValue}>
+      <h1>Select</h1>
+      <Select
+        onChange={handleChangeValue}
+        value={selectedValue}
+        label="메뉴 선택"
+      >
         {/** 클릭 시 Option들을 보여주고, 선택된 option를 보여줌 **/}
         <Select.Trigger />
         {/** 보여질 Option들을 나열 **/}
