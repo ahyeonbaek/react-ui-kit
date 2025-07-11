@@ -1,12 +1,18 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 import { CarouselContext } from ".";
 import { carouselIndicatorBaseCls } from "@consts/className";
 
 interface IndicatorProps {
   className?: string;
+  currentSymbol?: any;
+  otherSymbol?: any;
 }
 
-const CarouselIndicator = ({ className }: IndicatorProps) => {
+const CarouselIndicator = ({
+  className,
+  currentSymbol = "●",
+  otherSymbol = "○",
+}: IndicatorProps) => {
   const { currentPage, itemLength } = useContext(CarouselContext);
 
   const CarouselIndicatorCls = useMemo(() => {
@@ -19,8 +25,8 @@ const CarouselIndicator = ({ className }: IndicatorProps) => {
     <div>
       {Array.from({ length: itemLength }, (_, i) => (
         <span key={i} className={CarouselIndicatorCls}>
-          {i === currentPage ? "●" : "○"}
-        </span> // 현재페이지와 i가 같으면 ●, 같지않으면○
+          {i === currentPage ? currentSymbol : otherSymbol}
+        </span>
       ))}
     </div>
   );
