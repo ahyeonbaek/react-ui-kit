@@ -9,7 +9,7 @@ const getPackageJsonData = () => {
   const { react: reactVersion, "react-dom": reactDomVersion } =
     packageJson.dependencies;
   return {
-    version: "0.0.13",
+    version: "0.0.15",
     name: packageName,
     main: "./index.cjs",
     module: "./index.js",

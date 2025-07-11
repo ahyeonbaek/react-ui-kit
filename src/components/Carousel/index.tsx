@@ -9,9 +9,10 @@ import {
 } from "react";
 import CarouselItemList from "./CarouselItemList";
 import CarouselItem from "./CarouselItem";
-import CarouselNavigator from "./CarouselNavigator";
 import CarouselIndicator from "./CarouselIndicator";
 import { carouselBaseCls } from "../../consts/className";
+import CarouselPrevNavigator from "./CarouselPrevNavigator";
+import CarouselNextNavigator from "./CarouselNextNavigator";
 
 interface CarouselContextProps {
   currentPage: number;
@@ -29,7 +30,8 @@ interface CarouselProps {
 interface CarouselCompoundProps {
   ItemList: typeof CarouselItemList;
   Item: typeof CarouselItem;
-  Navigator: typeof CarouselNavigator;
+  PrevNavigator: typeof CarouselPrevNavigator;
+  NextNavigator: typeof CarouselNextNavigator;
   Indicator: typeof CarouselIndicator;
 }
 
@@ -76,7 +78,8 @@ const Carousel: FC<CarouselProps> & CarouselCompoundProps = (props) => {
 
 Carousel.ItemList = CarouselItemList;
 Carousel.Item = CarouselItem;
-Carousel.Navigator = CarouselNavigator;
+Carousel.PrevNavigator = CarouselPrevNavigator;
+Carousel.NextNavigator = CarouselNextNavigator;
 Carousel.Indicator = CarouselIndicator;
 
 export default Carousel;

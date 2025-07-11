@@ -117,7 +117,8 @@ function App() {
           <Carousel.Item page={1}></Carousel.Item>
           <Carousel.Item page={2}></Carousel.Item>
         </Carousel.ItemList>
-        <Carousel.Navigator />
+        <Carousel.PrevNavigator />
+        <Carousel.NextNavigator />
         <Carousel.Indicator />
       </Carousel>
       <h1>Breadcrumb</h1>
